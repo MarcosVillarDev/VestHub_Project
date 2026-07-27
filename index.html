@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VestHub — Entrar</title>
+
+    <!-- =========================================================
+         Bootstrap 5.3 via CDN
+         ========================================================= -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS customizado do projeto -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- =========================================================
+         Wrapper principal — ocupa a viewport inteira no desktop
+         ========================================================= -->
+    <main id="main-wrapper">
+
+      <!-- =======================================================
+           Container do card de login
+           Mobile  : coluna única, max-width 393px, centralizado
+           Desktop : linha dividida 50/50, fullscreen
+           ======================================================= -->
+      <div class="login-card" role="region" aria-label="Área de login">
+
+        <!-- ---------------------------------------------------
+             LADO DIREITO (desktop) / TOPO (mobile)
+             Banner escuro com textura e logo centralizado
+             --------------------------------------------------- -->
+        <section class="banner-section" aria-label="Logo VestHub">
+          <img
+            src="assets/imgs/Logo Whit NoBackground.png"
+            alt="Logotipo VestHub"
+            class="banner-logo"
+          />
+        </section>
+
+        <!-- ---------------------------------------------------
+             LADO ESQUERDO (desktop) / PARTE INFERIOR (mobile)
+             Formulário de login em fundo branco
+             --------------------------------------------------- -->
+        <section class="form-section">
+
+          <!-- Título do formulário -->
+          <h1 class="form-title">Entrar</h1>
+
+          <!-- Formulário -->
+          <form id="loginForm" novalidate aria-label="Formulário de login">
+
+            <!-- Campo e-mail -->
+            <div class="mb-3">
+              <label for="email" class="form-label label-dark">
+                E-mail
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control custom-input"
+                placeholder="seuemail@exemplo.com"
+                autocomplete="email"
+                required
+                aria-required="true"
+                aria-describedby="emailFeedback"
+              />
+              <div id="emailFeedback" class="invalid-feedback">
+                Por favor, informe um e-mail válido.
+              </div>
+            </div>
+
+            <!-- Campo senha -->
+            <div class="mb-2">
+              <label for="senha" class="form-label label-dark">
+                Senha
+              </label>
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                class="form-control custom-input"
+                placeholder="••••••••"
+                autocomplete="current-password"
+                required
+                aria-required="true"
+                aria-describedby="senhaFeedback"
+              />
+              <div id="senhaFeedback" class="invalid-feedback">
+                Por favor, informe sua senha.
+              </div>
+            </div>
+
+            <!-- Link "Esqueci minha senha" -->
+            <div class="text-center mb-4">
+              <a href="#" class="forgot-link" aria-label="Recuperar senha">
+                Esqueci minha senha
+              </a>
+            </div>
+
+            <!-- Botão de envio -->
+            <button
+              type="submit"
+              class="btn btn-login w-100"
+              aria-label="Entrar na conta"
+            >
+              Entrar
+            </button>
+
+            <!-- Link de cadastro -->
+            <p class="register-text text-center mt-4">
+              Não possui uma conta?<br class="d-sm-none" />
+              <a href="register.html" class="register-link" aria-label="Criar conta">
+                Crie agora
+              </a>
+            </p>
+
+          </form><!-- /#loginForm -->
+
+        </section><!-- /.form-section -->
+
+      </div><!-- /.login-card -->
+
+    </main><!-- /#main-wrapper -->
+
+    <!-- =========================================================
+         Bootstrap 5.3 Bundle JS (inclui Popper)
+         ========================================================= -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmtCF+egqWXh8GtlmJQK+D80kKqp7bv88"
+      crossorigin="anonymous"
+    ></script>
+
+  </body>
+</html>

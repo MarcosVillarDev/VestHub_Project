@@ -1,0 +1,304 @@
+/* =============================================================
+   style.css — VestHub | Página de Login
+   Complemento ao Bootstrap 5 (Mobile First)
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   1. VARIÁVEIS GLOBAIS (Custom Properties)
+   ------------------------------------------------------------- */
+:root {
+  --vesthub-bg:          #e5e5e5;    /* Fundo cinza claro da página     */
+  --vesthub-dark:        #1e1e1e;    /* Cor escura principal (botão)     */
+  --vesthub-dark-hover:  #000000;    /* Hover do botão                   */
+  --vesthub-white:       #ffffff;    /* Fundo do formulário              */
+  --vesthub-label:       #000000;    /* Cor dos labels                   */
+  --vesthub-forgot:      #6c757d;    /* Cor do link "esqueci a senha"    */
+  --vesthub-register:    #1e1e1e;    /* Cor do link "Crie agora"         */
+  --input-radius:        12px;       /* Border-radius dos inputs         */
+  --card-radius-mobile:  50px;        /* border-top-left-radius mobile    */
+  --card-radius-desktop: 20px;       /* Arredondamento desktop           */
+  --banner-height-mobile: 232px;     /* Altura do banner no mobile       */
+  --logo-width-mobile:   249px;      /* Largura do logo no mobile        */
+  --input-shadow:        0 2px 8px rgba(0, 0, 0, 0.08); /* Sombra suave  */
+}
+
+/* -------------------------------------------------------------
+   2. RESET / BASE
+   ------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--vesthub-bg);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  margin: 0;
+}
+
+/* -------------------------------------------------------------
+   3. WRAPPER PRINCIPAL
+   Ocupa a viewport inteira em todos os tamanhos de tela
+   ------------------------------------------------------------- */
+#main-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------
+   4. CARD DE LOGIN — MOBILE FIRST (padrão < 768px)
+   ------------------------------------------------------------- */
+.login-card {
+  display: flex;
+  flex-direction: column;      /* Empilha: banner em cima, form embaixo */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ---
+   4a. BANNER (topo no mobile)
+   Banner escuro com textura e logo centralizado
+--- */
+.banner-section {
+  /* Textura de fundo — caminho relativo ao style.css na raiz do projeto */
+  background-image: url("assets/imgs/texture-background.png");
+  background-size: cover;
+  background-position: center center;
+  background-color: #1a1a1a;   /* Fallback caso a imagem não carregue    */
+
+  /* Ocupa 40% da altura da tela no mobile                               */
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;              /* Não comprime o banner no flex container */
+}
+
+/* Logo branco dentro do banner */
+.banner-logo {
+  /* Escala proporcional: mínimo 291px, ideal 81.9vw, máximo 1274px (+40%) */
+  width: clamp(291px, 81.9vw, 1274px);
+  max-width: 85%;              /* Garante que não estoure nas bordas      */
+  height: auto;
+  display: block;
+  /* Leve sombra para destacar do fundo texturizado */
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
+}
+
+/* ---
+   4b. SEÇÃO DO FORMULÁRIO (parte inferior no mobile)
+--- */
+.form-section {
+  background-color: var(--vesthub-white);
+  padding: 2rem 1.75rem 2.5rem; /* Espaçamento interno confortável       */
+  flex: 1;                       /* Ocupa o espaço restante do card       */
+  overflow-y: auto;              /* Scroll se conteúdo exceder a área     */
+
+  /* Centraliza o conteúdo verticalmente dentro da seção                  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* Arredondamento apenas no canto superior ESQUERDO (mobile)            */
+  border-radius: 0;
+  border-top-left-radius: var(--card-radius-mobile);
+
+  /* Margem negativa para sobrepor sutilmente o banner (efeito flutuante) */
+  margin-top: -24px;
+}
+
+/* -------------------------------------------------------------
+   5. COMPONENTES DO FORMULÁRIO
+   ------------------------------------------------------------- */
+
+/* Título "Entrar" */
+.form-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--vesthub-dark);
+  margin-bottom: 1.5rem;
+}
+
+/* Labels */
+.label-dark {
+  color: var(--vesthub-label);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Inputs (e-mail e senha) */
+.custom-input {
+  border-radius: var(--input-radius) !important;
+  padding: 0.65rem 1rem;
+  border: 1px solid #dee2e6;
+  box-shadow: var(--input-shadow);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Estado de foco — destaque sem cor de marca distante */
+.custom-input:focus {
+  border-color: #6c757d;
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.2);
+  outline: none;
+}
+
+/* Estados de validação Bootstrap — mantém o border-radius customizado */
+.custom-input.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+.custom-input.is-valid {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.15);
+}
+
+/* Link "Esqueci minha senha" */
+.forgot-link {
+  color: var(--vesthub-forgot);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.forgot-link:hover,
+.forgot-link:focus {
+  color: var(--vesthub-dark);
+  text-decoration: underline;
+}
+
+/* Botão "Entrar" */
+.btn-login {
+  background-color: var(--vesthub-dark);
+  color: var(--vesthub-white);
+  border: none;
+  border-radius: var(--input-radius);
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-login:hover,
+.btn-login:focus {
+  background-color: var(--vesthub-dark-hover);
+  color: var(--vesthub-white);
+  transform: translateY(-1px); /* Leve elevação no hover */
+}
+
+.btn-login:active {
+  transform: translateY(0);
+}
+
+/* Texto de cadastro na base */
+.register-text {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.register-link {
+  color: var(--vesthub-register);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.register-link:hover,
+.register-link:focus {
+  color: var(--vesthub-dark-hover);
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------------
+   6. DESKTOP (>= 768px) — "Split Screen" 50% / 50% Fullscreen
+   ------------------------------------------------------------- */
+@media (min-width: 768px) {
+
+  /* Wrapper já está configurado no base — sem overrides necessários */
+  #main-wrapper {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  /* Card ocupa 100vw x 100vh, sem borda arredondada, sem sombra externa */
+  .login-card {
+    flex-direction: row;          /* Formulário (esq) | Banner (dir)     */
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    border-radius: 0;             /* Sem arredondamento — colado nas bordas */
+    overflow: hidden;
+    box-shadow: none;
+  }
+
+  /* ---
+     Formulário — lado ESQUERDO no desktop (50%)
+  --- */
+  .form-section {
+    flex: 1;                      /* Ocupa exatamente metade da largura  */
+    height: 100%;
+    padding: 2.5rem 3rem;
+
+    /* Remove margem negativa do mobile */
+    margin-top: 0;
+
+    /* Remove arredondamento do mobile */
+    border-radius: 0;
+
+    /* Permite scroll se conteúdo exceder a altura da tela */
+    overflow-y: auto;
+
+    /* Centraliza o conteúdo vertical e horizontalmente na metade */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Limita a largura do conteúdo interno para não esticar demais */
+  .form-section form,
+  .form-section .form-title {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  /* ---
+     Banner — lado DIREITO no desktop (50%)
+  --- */
+  .banner-section {
+    order: 1;                     /* Posiciona o banner à direita        */
+    flex: 1;                      /* Ocupa exatamente metade da largura  */
+    height: 100%;
+  }
+
+  /* Logo escala proporcionalmente até 1274px no desktop (+40%) */
+  .banner-logo {
+    width: clamp(510px, 72.8%, 1274px);
+    max-width: 150%;
+  }
+
+  /* Título um pouco maior no desktop */
+  .form-title {
+    font-size: 2rem;
+  }
+}
+
+/* -------------------------------------------------------------
+   7. ACESSIBILIDADE — foco visível para navegação por teclado
+   ------------------------------------------------------------- */
+:focus-visible {
+  outline: 3px solid #6c757d;
+  outline-offset: 2px;
+}
