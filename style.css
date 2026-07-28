@@ -139,14 +139,16 @@ body {
 
 .btn-register-banner:hover,
 .btn-register-banner:focus {
-
-  background-color: var(#000000);
-  color: var(#ebebeb);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--vesthub-white);
   transform: translateY(-2px);
   outline: none;
 }
 
-.btn-register-banner:active {
+.btn-register-banner:active,
+.btn-register-banner:focus:active {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: var(--vesthub-white) !important;
   transform: translateY(0);
 }
 
@@ -245,7 +247,15 @@ body {
   transform: translateY(-1px);
 }
 
-.btn-login:active {
+.btn-login:active,
+.btn-login:focus:active {
+  background-color: var(--vesthub-dark-hover) !important;
+  color: var(--vesthub-white) !important;
+  border-color: #3B3B3B;
+  transform: translateY(0);
+}
+
+.btn-login:after {
   transform: translateY(0);
 }
 
