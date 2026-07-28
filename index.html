@@ -6,6 +6,16 @@
     <title>VestHub — Entrar</title>
 
     <!-- =========================================================
+         Google Fonts — Montserrat (formulário) + Jost (títulos/botões)
+         ========================================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- =========================================================
          Bootstrap 5.3 via CDN
          ========================================================= -->
     <link
@@ -24,28 +34,43 @@
          Wrapper principal — ocupa a viewport inteira no desktop
          ========================================================= -->
     <main id="main-wrapper">
-
+    
       <!-- =======================================================
            Container do card de login
-           Mobile  : coluna única, max-width 393px, centralizado
+           Mobile  : coluna única, fullscreen
            Desktop : linha dividida 50/50, fullscreen
            ======================================================= -->
       <div class="login-card" role="region" aria-label="Área de login">
 
         <!-- ---------------------------------------------------
-             LADO DIREITO (desktop) / TOPO (mobile)
-             Banner escuro com textura e logo centralizado
+             LADO DIREITO (desktop) / PARTE INFERIOR (mobile)
+             Banner escuro com textura, logo e botão Registrar
              --------------------------------------------------- -->
         <section class="banner-section" aria-label="Logo VestHub">
+
+          <!-- Logo -->
           <img
             src="assets/imgs/Logo Whit NoBackground.png"
             alt="Logotipo VestHub"
             class="banner-logo"
           />
-        </section>
+
+          <!-- Botão Registrar — visível apenas em telas >= 1024px -->
+          <div class="btn-register-desktop" aria-hidden="false">
+            <a
+              href="register.html"
+              class="btn-register-banner"
+              aria-label="Criar uma nova conta"
+            >
+              Registrar
+            </a>
+            <p class="banner-register-text">Crie sua conta agora</p>
+          </div>
+
+        </section><!-- /.banner-section -->
 
         <!-- ---------------------------------------------------
-             LADO ESQUERDO (desktop) / PARTE INFERIOR (mobile)
+             LADO ESQUERDO (desktop) / PARTE SUPERIOR (mobile)
              Formulário de login em fundo branco
              --------------------------------------------------- -->
         <section class="form-section">

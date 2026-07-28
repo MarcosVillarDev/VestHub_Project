@@ -7,19 +7,20 @@
    1. VARIÁVEIS GLOBAIS (Custom Properties)
    ------------------------------------------------------------- */
 :root {
-  --vesthub-bg:          #e5e5e5;    /* Fundo cinza claro da página     */
-  --vesthub-dark:        #1e1e1e;    /* Cor escura principal (botão)     */
-  --vesthub-dark-hover:  #000000;    /* Hover do botão                   */
-  --vesthub-white:       #ffffff;    /* Fundo do formulário              */
-  --vesthub-label:       #000000;    /* Cor dos labels                   */
-  --vesthub-forgot:      #6c757d;    /* Cor do link "esqueci a senha"    */
-  --vesthub-register:    #1e1e1e;    /* Cor do link "Crie agora"         */
-  --input-radius:        12px;       /* Border-radius dos inputs         */
-  --card-radius-mobile:  50px;        /* border-top-left-radius mobile    */
-  --card-radius-desktop: 20px;       /* Arredondamento desktop           */
-  --banner-height-mobile: 232px;     /* Altura do banner no mobile       */
-  --logo-width-mobile:   249px;      /* Largura do logo no mobile        */
-  --input-shadow:        0 2px 8px rgba(0, 0, 0, 0.08); /* Sombra suave  */
+  --vesthub-bg:           #e5e5e5;
+  --vesthub-dark:         #1e1e1e;
+  --vesthub-dark-hover:   #2c2c2c;
+  --vesthub-white:        #ffffff;
+  --vesthub-label:        #000000;
+  --vesthub-forgot:       #6c757d;
+  --vesthub-register:     #1e1e1e;
+  --input-radius:         12px;
+  --card-radius-mobile:   50px;
+  --input-shadow:         0 2px 8px rgba(0, 0, 0, 0.08);
+
+  /* Fontes */
+  --font-body:   'Montserrat', system-ui, sans-serif;  /* Formulário     */
+  --font-titles: 'Jost', system-ui, sans-serif;        /* Títulos/botões */
 }
 
 /* -------------------------------------------------------------
@@ -33,13 +34,12 @@
 
 body {
   background-color: var(--vesthub-bg);
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   margin: 0;
 }
 
 /* -------------------------------------------------------------
-   3. WRAPPER PRINCIPAL
-   Ocupa a viewport inteira em todos os tamanhos de tela
+   3. WRAPPER PRINCIPAL — fullscreen em todas as telas
    ------------------------------------------------------------- */
 #main-wrapper {
   width: 100vw;
@@ -51,74 +51,121 @@ body {
 }
 
 /* -------------------------------------------------------------
-   4. CARD DE LOGIN — MOBILE FIRST (padrão < 768px)
+   4. CARD — MOBILE FIRST (< 768px)
+   Empilha: form no topo, banner embaixo
    ------------------------------------------------------------- */
 .login-card {
   display: flex;
-  flex-direction: column;      /* Empilha: banner em cima, form embaixo */
+  flex-direction: column;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
 /* ---
-   4a. BANNER (topo no mobile)
-   Banner escuro com textura e logo centralizado
---- */
-.banner-section {
-  /* Textura de fundo — caminho relativo ao style.css na raiz do projeto */
-  background-image: url("assets/imgs/texture-background.png");
-  background-size: cover;
-  background-position: center center;
-  background-color: #1a1a1a;   /* Fallback caso a imagem não carregue    */
-
-  /* Ocupa 40% da altura da tela no mobile                               */
-  height: 40vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;              /* Não comprime o banner no flex container */
-}
-
-/* Logo branco dentro do banner */
-.banner-logo {
-  /* Escala proporcional: mínimo 291px, ideal 81.9vw, máximo 1274px (+40%) */
-  width: clamp(291px, 81.9vw, 1274px);
-  max-width: 85%;              /* Garante que não estoure nas bordas      */
-  height: auto;
-  display: block;
-  /* Leve sombra para destacar do fundo texturizado */
-  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
-}
-
-/* ---
-   4b. SEÇÃO DO FORMULÁRIO (parte inferior no mobile)
+   4a. SEÇÃO DO FORMULÁRIO — topo no mobile
 --- */
 .form-section {
   background-color: var(--vesthub-white);
-  padding: 2rem 1.75rem 2.5rem; /* Espaçamento interno confortável       */
-  flex: 1;                       /* Ocupa o espaço restante do card       */
-  overflow-y: auto;              /* Scroll se conteúdo exceder a área     */
-
-  /* Centraliza o conteúdo verticalmente dentro da seção                  */
+  padding: 2rem 1.75rem 2.5rem;
+  flex: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  /* Arredondamento apenas no canto superior ESQUERDO (mobile)            */
+  /* Arredondamento inferior esquerdo no mobile */
   border-radius: 0;
-  border-top-left-radius: var(--card-radius-mobile);
+  border-bottom-left-radius: var(--card-radius-mobile);
+}
 
-  /* Margem negativa para sobrepor sutilmente o banner (efeito flutuante) */
-  margin-top: -24px;
+/* ---
+   4b. BANNER — parte inferior no mobile
+--- */
+.banner-section {
+  background-image: url("assets/imgs/texture-background.png");
+  background-size: cover;
+  background-position: center center;
+  background-color: #1a1a1a;
+
+  height: 40vh;
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Logo branco */
+.banner-logo {
+  width: clamp(291px, 81.9vw, 1274px);
+  max-width: 30%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
 }
 
 /* -------------------------------------------------------------
-   5. COMPONENTES DO FORMULÁRIO
+   5. BOTÃO REGISTRAR DO BANNER
+   Oculto por padrão — aparece apenas em >= 1024px
+   ------------------------------------------------------------- */
+.btn-register-desktop {
+  display: none;   /* Oculto em mobile e tablet */
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* O botão em si */
+.btn-register-banner {
+  font-family: var(--font-titles);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--vesthub-white);
+  text-decoration: none;
+  background-color: transparent;
+  border: 4px solid var(--vesthub-white);
+  border-radius: 12px;
+  padding: 6% 14%;         /* Proporção retangular confortável           */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-register-banner:hover,
+.btn-register-banner:focus {
+
+  background-color: var(#000000);
+  color: var(#ebebeb);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.btn-register-banner:active {
+  transform: translateY(0);
+}
+
+/* Texto abaixo do botão */
+.banner-register-text {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* -------------------------------------------------------------
+   6. COMPONENTES DO FORMULÁRIO
    ------------------------------------------------------------- */
 
-/* Título "Entrar" */
+/* Título "Entrar" / "Criar conta" */
 .form-title {
+  font-family: var(--font-titles);
   font-size: 1.75rem;
   font-weight: 700;
   text-align: center;
@@ -128,14 +175,16 @@ body {
 
 /* Labels */
 .label-dark {
+  font-family: var(--font-titles);
   color: var(--vesthub-label);
   font-weight: 500;
   font-size: 0.9rem;
   margin-bottom: 0.4rem;
 }
 
-/* Inputs (e-mail e senha) */
+/* Inputs */
 .custom-input {
+  font-family: var(--font-body);
   border-radius: var(--input-radius) !important;
   padding: 0.65rem 1rem;
   border: 1px solid #dee2e6;
@@ -143,14 +192,12 @@ body {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Estado de foco — destaque sem cor de marca distante */
 .custom-input:focus {
   border-color: #6c757d;
   box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.2);
   outline: none;
 }
 
-/* Estados de validação Bootstrap — mantém o border-radius customizado */
 .custom-input.is-invalid {
   border-color: #dc3545;
   box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
@@ -163,6 +210,7 @@ body {
 
 /* Link "Esqueci minha senha" */
 .forgot-link {
+  font-family: var(--font-body);
   color: var(--vesthub-forgot);
   font-size: 0.85rem;
   text-decoration: none;
@@ -175,16 +223,18 @@ body {
   text-decoration: underline;
 }
 
-/* Botão "Entrar" */
+/* Botão "Entrar" / "Criar conta" */
 .btn-login {
-  background-color: var(--vesthub-dark);
-  color: var(--vesthub-white);
-  border: none;
-  border-radius: var(--input-radius);
-  padding: 0.7rem 1rem;
-  font-size: 1rem;
+  height: 55px;
+  font-family: var(--font-titles);
   font-weight: 600;
   letter-spacing: 0.3px;
+  border: 4px solid #3B3B3B;
+  background-color: var(--vesthub-dark);
+  color: var(--vesthub-white);
+  border-radius: var(--input-radius);
+  padding: 0;
+  font-size: 1rem;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
@@ -192,7 +242,7 @@ body {
 .btn-login:focus {
   background-color: var(--vesthub-dark-hover);
   color: var(--vesthub-white);
-  transform: translateY(-1px); /* Leve elevação no hover */
+  transform: translateY(-1px);
 }
 
 .btn-login:active {
@@ -201,6 +251,7 @@ body {
 
 /* Texto de cadastro na base */
 .register-text {
+  font-family: var(--font-body);
   font-size: 0.875rem;
   color: #6c757d;
   margin-bottom: 0;
@@ -208,6 +259,7 @@ body {
 }
 
 .register-link {
+  font-family: var(--font-titles);
   color: var(--vesthub-register);
   font-weight: 600;
   text-decoration: none;
@@ -222,81 +274,72 @@ body {
 }
 
 /* -------------------------------------------------------------
-   6. DESKTOP (>= 768px) — "Split Screen" 50% / 50% Fullscreen
+   7. TABLET / DESKTOP BASE (>= 768px) — Split Screen 50 / 50
    ------------------------------------------------------------- */
 @media (min-width: 768px) {
 
-  /* Wrapper já está configurado no base — sem overrides necessários */
-  #main-wrapper {
-    padding: 0;
-    align-items: stretch;
-  }
-
-  /* Card ocupa 100vw x 100vh, sem borda arredondada, sem sombra externa */
   .login-card {
-    flex-direction: row;          /* Formulário (esq) | Banner (dir)     */
+    flex-direction: row;    /* Form (esq) | Banner (dir) */
     width: 100vw;
     max-width: 100vw;
     height: 100vh;
-    border-radius: 0;             /* Sem arredondamento — colado nas bordas */
+    border-radius: 0;
     overflow: hidden;
     box-shadow: none;
   }
 
-  /* ---
-     Formulário — lado ESQUERDO no desktop (50%)
-  --- */
+  /* Formulário — lado ESQUERDO */
   .form-section {
-    flex: 1;                      /* Ocupa exatamente metade da largura  */
+    flex: 1;
     height: 100%;
     padding: 2.5rem 3rem;
-
-    /* Remove margem negativa do mobile */
     margin-top: 0;
-
-    /* Remove arredondamento do mobile */
     border-radius: 0;
-
-    /* Permite scroll se conteúdo exceder a altura da tela */
     overflow-y: auto;
-
-    /* Centraliza o conteúdo vertical e horizontalmente na metade */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
-  /* Limita a largura do conteúdo interno para não esticar demais */
   .form-section form,
   .form-section .form-title {
     width: 100%;
     max-width: 380px;
   }
 
-  /* ---
-     Banner — lado DIREITO no desktop (50%)
-  --- */
+  /* Banner — lado DIREITO */
   .banner-section {
-    order: 1;                     /* Posiciona o banner à direita        */
-    flex: 1;                      /* Ocupa exatamente metade da largura  */
+    flex: 1;
     height: 100%;
   }
 
-  /* Logo escala proporcionalmente até 1274px no desktop (+40%) */
+  /* Logo no desktop */
   .banner-logo {
     width: clamp(510px, 72.8%, 1274px);
-    max-width: 150%;
+    max-width: 40%;
   }
 
-  /* Título um pouco maior no desktop */
+  /* Título maior no desktop */
   .form-title {
     font-size: 2rem;
   }
 }
 
 /* -------------------------------------------------------------
-   7. ACESSIBILIDADE — foco visível para navegação por teclado
+   8. LARGE DESKTOP (>= 1024px) — Exibe botão Registrar no banner
+   ------------------------------------------------------------- */
+@media (min-width: 1024px) {
+
+  /* Revela o bloco do botão */
+  .btn-register-desktop {
+    display: flex;
+  
+  }
+}
+
+/* -------------------------------------------------------------
+   9. ACESSIBILIDADE — foco visível para navegação por teclado
    ------------------------------------------------------------- */
 :focus-visible {
   outline: 3px solid #6c757d;
