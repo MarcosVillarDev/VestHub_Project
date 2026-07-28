@@ -101,7 +101,7 @@ body {
 /* Logo branco */
 .banner-logo {
   width: clamp(291px, 81.9vw, 1274px);
-  max-width: 30%;
+  max-width: 45%;
   height: auto;
   display: block;
   filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
