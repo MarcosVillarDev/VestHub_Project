@@ -21,8 +21,9 @@ public class AppUserDetailService implements UserDetailsService {
         Usuarios usuario = usuariosRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
-        // Traduz o seu Usuarios para o formato UserDetails e devolve para o Spring Security.
-        return User.withUsername(usuario.getEmail()) // email do usuário
+        // Traduz o Usuarios para o formato UserDetails e devolve para o Spring Security.
+        return
+                User.withUsername(usuario.getEmail()) // email do usuário
                 .password(usuario.getSenha()) // senha do usuário em hash
                 .roles("USER") // papel/permissões
                 .build();
