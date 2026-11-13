@@ -8,4 +8,7 @@ import java.util.List;
 public interface NotasCorteRepository extends JpaRepository<NotasCorte, Long> {
 
     List<NotasCorte> findByCursoId(Long cursoId);
+
+    // Usado pelo ranking: todas as notas de corte de uma modalidade
+    List<NotasCorte> findByModalidadeId(Long modalidadeId);
 }
