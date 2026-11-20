@@ -1,0 +1,53 @@
+// Cole em https://dbdiagram.io para ver o diagrama
+
+Table universidades {
+  id bigint [pk, increment]
+  nome varchar(120) [not null]
+  sigla varchar(10) [not null, unique]
+  status varchar(30) [not null]
+}
+
+Table modalidades {
+  id bigint [pk, increment]
+  sigla varchar(10) [not null]
+  nome varchar(120) [not null]
+  universidade_id bigint [not null, ref: > universidades.id]
+}
+
+Table cursos {
+  id bigint [pk, increment]
+  nome varchar(150) [not null]
+  campus varchar(120) [not null]
+  turno varchar(15) [not null]
+  universidade_id bigint [not null, ref: > universidades.id]
+}
+
+Table notas_corte {
+  id bigint [pk, increment]
+  nota_corte decimal(6,2) [not null]
+  curso_id bigint [not null, ref: > cursos.id]
+  modalidade_id bigint [not null, ref: > modalidades.id]
+}
+
+Table usuarios {
+  id bigint [pk, increment]
+  nome varchar(120) [not null]
+  email varchar(150) [not null, unique]
+  senha char(60) [not null]
+  token_recuperacao varchar(36)
+  token_expiracao datetime
+}
+
+Table universidades_favoritas {
+  id bigint [pk, increment]
+  usuario_id bigint [not null, ref: > usuarios.id]
+  universidade_id bigint [not null, ref: > universidades.id]
+}
+
+Table desempenhos {
+  id bigint [pk, increment]
+  nota decimal(6,2) [not null]
+  usuario_id bigint [not null, ref: > usuarios.id]
+  universidade_id bigint [not null, ref: > universidades.id]
+  modalidade_id bigint [not null, ref: > modalidades.id]
+}
