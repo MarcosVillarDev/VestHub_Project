@@ -41,7 +41,7 @@
             // A API confere e-mail e senha; se der certo, devolve { id, nome, email }
             const usuario = await api("/auth/login", { auth: auth });
             salvarLogin(auth, usuario);
-            window.location.href = "universidades.html";
+            window.location.href = "inicio.html";
           } catch (erro) {
             const texto = erro.status === 401 ? "E-mail ou senha inválidos." : erro.message;
             mostrarMensagem(mensagemApi, texto, "danger");

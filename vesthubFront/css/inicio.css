@@ -1,0 +1,317 @@
+/* =============================================================
+   inicio.css — VestHub | Tela inicial (após o login)
+   Usa as variáveis do style.css. Mobile first:
+     < 768px  : topo preto, banner, prévia do ranking, barra inferior
+     >= 768px : topo branco com menu ☰, banner, prévia do ranking
+   O topo, a barra inferior e o menu lateral vão se repetir nas
+   próximas páginas: dá para movê-los para um "app.css" depois.
+   ============================================================= */
+
+:root {
+  --acima:         #1e8e4e;
+  --acima-fundo:   #e6f4ec;
+  --abaixo:        #c0392b;
+  --abaixo-fundo:  #fbeaea;
+  --altura-topo:   56px;
+  --altura-barra:  64px;
+}
+
+/* -------------------------------------------------------------
+   1. BASE
+   ------------------------------------------------------------- */
+body.pagina-app {
+  background-color: var(--vesthub-white);
+  min-height: 100vh;
+  /* espaço para a barra inferior fixa no celular */
+  padding-bottom: calc(var(--altura-barra) + env(safe-area-inset-bottom, 0px));
+}
+
+/* -------------------------------------------------------------
+   2. TOPO — celular: preto com logo branco centralizado
+   ------------------------------------------------------------- */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  height: var(--altura-topo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  background-color: #000;
+}
+
+.topo-logo img {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+.logo-preto { display: none !important; }
+
+/* O menu ☰ só aparece a partir do tablet */
+.btn-menu {
+  display: none;
+  background: none;
+  border: 0;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--vesthub-dark);
+  padding: 0.25rem;
+}
+
+/* -------------------------------------------------------------
+   3. BANNER
+   ------------------------------------------------------------- */
+.hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: cover;
+  object-position: center top; /* se precisar cortar, preserva o topo da ilustração */
+}
+
+/* -------------------------------------------------------------
+   4. PRÉVIA DO RANKING
+   ------------------------------------------------------------- */
+.previa {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 1.75rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.previa-saudacao {
+  font-family: var(--font-titles);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--vesthub-forgot);
+  margin: 0;
+}
+
+.previa-titulo {
+  font-family: var(--font-titles);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--vesthub-dark);
+  margin: 0.15rem 0 1.25rem;
+  text-wrap: balance;
+}
+
+.previa-carregando {
+  color: var(--vesthub-forgot);
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+/* --- Lista dos 3 cursos --- */
+.previa-lista {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--vesthub-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  text-align: left;
+}
+
+.previa-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.previa-item:last-child { border-bottom: 0; }
+
+.previa-posicao {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: var(--vesthub-dark);
+  color: var(--vesthub-white);
+  font-family: var(--font-titles);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.previa-curso {
+  flex: 1;
+  min-width: 0;
+}
+
+.previa-curso-nome {
+  display: block;
+  font-family: var(--font-titles);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--vesthub-dark);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.previa-curso-detalhe {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--vesthub-forgot);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Selo com a diferença para a nota de corte */
+.previa-diferenca {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+
+.previa-diferenca strong {
+  font-size: 0.95rem;
+}
+
+.previa-diferenca small {
+  font-size: 0.65rem;
+}
+
+.previa-diferenca.acima  { color: var(--acima);  background-color: var(--acima-fundo); }
+.previa-diferenca.abaixo { color: var(--abaixo); background-color: var(--abaixo-fundo); }
+
+/* --- Sem notas --- */
+.previa-vazia {
+  width: 100%;
+  padding: 1.5rem 1rem;
+  border: 2px dashed #dddddd;
+  border-radius: 12px;
+  color: var(--vesthub-forgot);
+}
+
+.previa-vazia p { margin: 0; }
+
+.previa-vazia-icone {
+  display: block;
+  font-size: 2rem;
+  color: var(--vesthub-dark);
+  margin-bottom: 0.5rem;
+}
+
+/* Botão (usa o .btn-login do style.css) */
+.previa-botao {
+  margin-top: 1.25rem;
+  width: 100%;
+  max-width: 280px;
+  /* o .btn-login tem altura fixa e padding 0: num link <a>, centraliza o texto */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -------------------------------------------------------------
+   5. BARRA INFERIOR — só no celular
+   ------------------------------------------------------------- */
+.barra-inferior {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1020;
+  height: calc(var(--altura-barra) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--vesthub-white);
+  border-top: 1px solid #ececec;
+}
+
+.barra-inferior a,
+.barra-inferior button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: 0;
+  font-size: 1.45rem;
+  color: var(--vesthub-dark);
+  text-decoration: none;
+}
+
+/* -------------------------------------------------------------
+   6. MENU LATERAL
+   ------------------------------------------------------------- */
+.menu-lateral { max-width: 300px; }
+
+.saudacao {
+  font-family: var(--font-titles);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.menu-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 10px;
+  color: var(--vesthub-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.menu-links a:hover,
+.menu-links a:focus-visible,
+.menu-links a[aria-current="page"] {
+  background-color: #f1f1f1;
+}
+
+.icone-barra {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+/* -------------------------------------------------------------
+   7. TABLET E DESKTOP (>= 768px)
+   ------------------------------------------------------------- */
+@media (min-width: 768px) {
+  body.pagina-app { padding-bottom: 0; }
+
+  .topo {
+    justify-content: space-between;
+    background-color: var(--vesthub-white);
+    padding: 0 1.5rem;
+  }
+
+  .logo-branco { display: none !important; }
+  .logo-preto  { display: block !important; }
+
+  .btn-menu       { display: block; }
+  .barra-inferior { display: none; }
+
+  .previa { padding: 2.5rem 1.5rem 3.5rem; }
+  .previa-titulo { font-size: 1.6rem; }
+}
