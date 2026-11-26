@@ -63,6 +63,7 @@ public class FavoritasService {
     }
 
     private UniversidadesDto paraDto(Universidades u) {
-        return new UniversidadesDto(u.getId(), u.getNome(), u.getSigla(), u.getStatus());
+        return new UniversidadesDto(u.getId(), u.getNome(), u.getSigla(), u.getStatus(),
+                u.getNotaMaxima()); // NOVO: 5º argumento
     }
 }

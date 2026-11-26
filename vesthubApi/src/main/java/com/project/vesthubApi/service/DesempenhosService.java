@@ -56,6 +56,12 @@ public class DesempenhosService {
             throw new NegocioException("Esta modalidade não pertence a esta universidade");
         }
 
+        // Regra: a nota não pode passar do máximo do vestibular (ex.: 90 acertos na Fuvest)
+        if (dto.getNota().compareTo(universidade.getNotaMaxima()) > 0) {
+            throw new NegocioException("A nota máxima da " + universidade.getSigla()
+                    + " é " + universidade.getNotaMaxima().stripTrailingZeros().toPlainString());
+        }
+
         Desempenhos desempenho = desempenhosRepository
                 .findByUsuarioEmailAndUniversidadeId(email, universidade.getId())
                 .orElseGet(() -> {

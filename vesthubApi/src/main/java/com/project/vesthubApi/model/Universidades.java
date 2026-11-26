@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
+
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -23,4 +25,7 @@ public class Universidades {
 
     @Column(name = "status", length = 30)
     private String status;
+
+    @Column(name = "nota_maxima", precision = 6, scale = 2)
+    private BigDecimal notaMaxima;
 }

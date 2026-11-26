@@ -22,7 +22,8 @@ public class UniversidadesService {
 
     public List<UniversidadesDto> listar() {
         return universidadesRepository.findAll().stream()
-                .map(u -> new UniversidadesDto(u.getId(), u.getNome(), u.getSigla(), u.getStatus()))
+                .map(u -> new UniversidadesDto(u.getId(), u.getNome(), u.getSigla(), u.getStatus(),
+                        u.getNotaMaxima())) // NOVO: 5º argumento
                 .toList();
     }
 
@@ -31,7 +32,8 @@ public class UniversidadesService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Universidade não encontrada"));
 
         return new UniversidadesDto(universidade.getId(), universidade.getNome(),
-                universidade.getSigla(), universidade.getStatus());
+                universidade.getSigla(), universidade.getStatus(),
+                universidade.getNotaMaxima()); // NOVO: 5º argumento
     }
 
     public List<ModalidadesDto> listarModalidades(Long universidadeId) {

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal; // NOVO
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,4 +17,5 @@ public class UniversidadesDto {
     private String nome;
     private String sigla;
     private String status;
+    private BigDecimal notaMaxima; // NOVO: o front usa para limitar o campo de nota
 }
