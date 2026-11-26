@@ -10,7 +10,8 @@
  */
 (function () {
   "use strict";
-
+  
+  redirecionarSeLogado();
   const form           = document.getElementById("registerForm");
   const nomeInput      = document.getElementById("nome");
   const emailInput     = document.getElementById("email");

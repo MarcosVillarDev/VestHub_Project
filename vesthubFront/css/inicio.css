@@ -1,10 +1,7 @@
 /* =============================================================
    inicio.css — VestHub | Tela inicial (após o login)
-   Usa as variáveis do style.css. Mobile first:
-     < 768px  : topo preto, banner, prévia do ranking, barra inferior
-     >= 768px : topo branco com menu ☰, banner, prévia do ranking
-   O topo, a barra inferior e o menu lateral vão se repetir nas
-   próximas páginas: dá para movê-los para um "app.css" depois.
+   Só o conteúdo desta tela: banner e prévia do ranking.
+   O topo, a barra inferior e o menu ficam no app.css.
    ============================================================= */
 
 :root {
@@ -12,68 +9,22 @@
   --acima-fundo:   #e6f4ec;
   --abaixo:        #c0392b;
   --abaixo-fundo:  #fbeaea;
-  --altura-topo:   56px;
-  --altura-barra:  64px;
 }
 
-/* -------------------------------------------------------------
-   1. BASE
-   ------------------------------------------------------------- */
-body.pagina-app {
-  background-color: var(--vesthub-white);
-  min-height: 100vh;
-  /* espaço para a barra inferior fixa no celular */
-  padding-bottom: calc(var(--altura-barra) + env(safe-area-inset-bottom, 0px));
+/* 1. BANNER EM VÍDEO — celular: vídeo em cima, prévia embaixo */
+.hero {
+  padding: 1rem 1rem 0;
 }
 
-/* -------------------------------------------------------------
-   2. TOPO — celular: preto com logo branco centralizado
-   ------------------------------------------------------------- */
-.topo {
-  position: sticky;
-  top: 0;
-  z-index: 1020;
-  height: var(--altura-topo);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1rem;
-  background-color: #000;
-}
-
-.topo-logo img {
-  height: 22px;
-  width: auto;
-  display: block;
-}
-
-.logo-preto { display: none !important; }
-
-/* O menu ☰ só aparece a partir do tablet */
-.btn-menu {
-  display: none;
-  background: none;
-  border: 0;
-  font-size: 1.6rem;
-  line-height: 1;
-  color: var(--vesthub-dark);
-  padding: 0.25rem;
-}
-
-/* -------------------------------------------------------------
-   3. BANNER
-   ------------------------------------------------------------- */
-.hero-img {
+.hero-video {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 80vh;
-  object-fit: cover;
-  object-position: center top; /* se precisar cortar, preserva o topo da ilustração */
+  height: auto;          /* altura proporcional: o vídeo aparece inteiro */
+  border-radius: 16px;   /* cantos arredondados do Figma */
 }
 
 /* -------------------------------------------------------------
-   4. PRÉVIA DO RANKING
+   2. PRÉVIA DO RANKING
    ------------------------------------------------------------- */
 .previa {
   width: 100%;
@@ -224,94 +175,45 @@ body.pagina-app {
 }
 
 /* -------------------------------------------------------------
-   5. BARRA INFERIOR — só no celular
-   ------------------------------------------------------------- */
-.barra-inferior {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1020;
-  height: calc(var(--altura-barra) + env(safe-area-inset-bottom, 0px));
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background-color: var(--vesthub-white);
-  border-top: 1px solid #ececec;
-}
-
-.barra-inferior a,
-.barra-inferior button {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  background: none;
-  border: 0;
-  font-size: 1.45rem;
-  color: var(--vesthub-dark);
-  text-decoration: none;
-}
-
-/* -------------------------------------------------------------
-   6. MENU LATERAL
-   ------------------------------------------------------------- */
-.menu-lateral { max-width: 300px; }
-
-.saudacao {
-  font-family: var(--font-titles);
-  font-weight: 600;
-  font-size: 1.15rem;
-  margin: 0;
-}
-
-.menu-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.menu-links a {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.7rem 0.75rem;
-  border-radius: 10px;
-  color: var(--vesthub-dark);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.menu-links a:hover,
-.menu-links a:focus-visible,
-.menu-links a[aria-current="page"] {
-  background-color: #f1f1f1;
-}
-
-.icone-barra {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-/* -------------------------------------------------------------
-   7. TABLET E DESKTOP (>= 768px)
+   3. TABLET E DESKTOP (>= 768px)
    ------------------------------------------------------------- */
 @media (min-width: 768px) {
-  body.pagina-app { padding-bottom: 0; }
-
-  .topo {
-    justify-content: space-between;
-    background-color: var(--vesthub-white);
-    padding: 0 1.5rem;
-  }
-
-  .logo-branco { display: none !important; }
-  .logo-preto  { display: block !important; }
-
-  .btn-menu       { display: block; }
-  .barra-inferior { display: none; }
-
   .previa { padding: 2.5rem 1.5rem 3.5rem; }
   .previa-titulo { font-size: 1.6rem; }
+}
+
+
+/* -------------------------------------------------------------
+   4. DESKTOP (>= 992px) — vídeo à esquerda, prévia à direita
+   ------------------------------------------------------------- */
+@media (min-width: 992px) {
+  .inicio {
+    display: grid;
+    /* o vídeo ganha mais espaço (3 partes) que a prévia (2 partes) */
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: center;             /* centraliza as duas na vertical */
+    gap: 4vw;                        /* espaço entre as colunas cresce com a tela */
+    max-width: 1760px;
+    margin: 0 auto;
+    padding: 2rem 4vw;
+    min-height: calc(100vh - var(--altura-topo));  /* altura da tela menos o topo */
+  }
+
+  .hero { padding: 0; }
+
+  .hero-video { border-radius: 24px; }
+
+  .previa {
+    padding: 0;
+    max-width: 640px;
+  }
+}
+
+/* -------------------------------------------------------------
+   5. TELAS GRANDES (>= 1400px) — textos um pouco maiores
+   ------------------------------------------------------------- */
+@media (min-width: 1400px) {
+  .previa-saudacao { font-size: 1.15rem; }
+  .previa-titulo   { font-size: 2.1rem; }
+  .previa-vazia    { font-size: 1.05rem; padding: 2rem 1.5rem; }
 }

@@ -42,7 +42,7 @@ body {
    3. WRAPPER PRINCIPAL — fullscreen em todas as telas
    ------------------------------------------------------------- */
 #main-wrapper {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: stretch;
@@ -83,7 +83,7 @@ body {
    4b. BANNER — parte inferior no mobile
 --- */
 .banner-section {
-  background-image: url("assets/imgs/texture-background.png");
+  background-image: url("../assets/imgs/texture-background.png");
   background-size: cover;
   background-position: center center;
   background-color: #1a1a1a;
@@ -290,8 +290,8 @@ body {
 
   .login-card {
     flex-direction: row;    /* Form (esq) | Banner (dir) */
-    width: 100vw;
-    max-width: 100vw;
+    width: 100%;
+    max-width: 100%;
     height: 100vh;
     border-radius: 0;
     overflow: hidden;

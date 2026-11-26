@@ -1,0 +1,156 @@
+/* =============================================================
+   ranking.css — VestHub | Meu ranking
+   Só o conteúdo desta tela. O topo, a barra inferior e o menu
+   ficam no app.css.
+   ============================================================= */
+
+:root {
+  --acima:         #1e8e4e;
+  --acima-fundo:   #e6f4ec;
+  --abaixo:        #c0392b;
+  --abaixo-fundo:  #fbeaea;
+}
+
+.ranking-carregando {
+  color: var(--vesthub-forgot);
+  font-size: 0.9rem;
+}
+
+/* --- Filtro --- */
+.ranking-filtro {
+  max-width: 320px;
+  margin-bottom: 1rem;
+}
+
+.ranking-filtro .form-label {
+  font-family: var(--font-titles);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.ranking-filtro .form-select {
+  border-radius: var(--input-radius);
+  box-shadow: var(--input-shadow);
+  min-height: 46px;
+}
+
+/* --- Resumo --- */
+.ranking-resumo {
+  font-size: 0.9rem;
+  color: var(--vesthub-dark);
+  margin: 0 0 0.75rem;
+}
+
+.ranking-resumo strong { color: var(--acima); }
+
+/* --- Lista --- */
+.ranking-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--vesthub-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.ranking-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.ranking-item:last-child { border-bottom: 0; }
+
+/* Linha que separa os cursos acima e abaixo do corte */
+.ranking-divisor {
+  padding: 0.45rem 1rem;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #eeeeee;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vesthub-forgot);
+}
+
+.ranking-posicao {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: var(--vesthub-dark);
+  color: var(--vesthub-white);
+  font-family: var(--font-titles);
+  font-weight: 700;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking-curso { min-width: 0; }
+
+.ranking-curso-nome {
+  display: block;
+  font-family: var(--font-titles);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--vesthub-dark);
+}
+
+.ranking-curso-detalhe,
+.ranking-curso-notas {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--vesthub-forgot);
+}
+
+.ranking-curso-notas { font-variant-numeric: tabular-nums; }
+
+/* Selo com a diferença para a nota de corte */
+.ranking-diferenca {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.ranking-diferenca strong { font-size: 0.95rem; }
+.ranking-diferenca small  { font-size: 0.65rem; }
+
+.ranking-diferenca.acima  { color: var(--acima);  background-color: var(--acima-fundo); }
+.ranking-diferenca.abaixo { color: var(--abaixo); background-color: var(--abaixo-fundo); }
+
+/* --- Sem notas --- */
+.ranking-vazio {
+  padding: 1.5rem 1rem;
+  border: 2px dashed #dddddd;
+  border-radius: 12px;
+  text-align: center;
+  color: var(--vesthub-forgot);
+}
+
+.ranking-vazio p { margin: 0 0 1rem; }
+
+.ranking-vazio-icone {
+  display: block;
+  font-size: 2rem;
+  color: var(--vesthub-dark);
+  margin-bottom: 0.5rem;
+}
+
+.ranking-botao {
+  width: 100%;
+  max-width: 280px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

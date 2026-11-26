@@ -41,19 +41,37 @@ function usuarioLogado() {
   return salvo ? JSON.parse(salvo) : null;
 }
 
+
 /** Apaga o login e volta para a tela de entrada. */
 function sair() {
   sessionStorage.removeItem("vesthub_auth");
   sessionStorage.removeItem("vesthub_usuario");
-  window.location.href = "login.html";
+  // replace: troca a página atual no histórico em vez de empilhar uma nova
+  window.location.replace("login.html");
 }
 
 /** Para páginas que exigem login: sem login, volta para a entrada. */
 function exigirLogin() {
   if (!sessionStorage.getItem("vesthub_auth")) {
-    window.location.href = "login.html";
+    window.location.replace("login.html");
+  }
+
+  // Se a página veio da memória do navegador (botão voltar),
+  // o código acima não roda de novo. O evento "pageshow" roda.
+  window.addEventListener("pageshow", (evento) => {
+    if (evento.persisted && !sessionStorage.getItem("vesthub_auth")) {
+      window.location.replace("login.html");
+    }
+  });
+}
+
+/** Para login e cadastro: quem já está logado vai direto para o início. */
+function redirecionarSeLogado() {
+  if (sessionStorage.getItem("vesthub_auth")) {
+    window.location.replace("inicio.html");
   }
 }
+
 
 /* ---------------------------------------------------------
    Chamada à API
@@ -87,7 +105,7 @@ async function api(caminho, opcoes = {}) {
     });
   } catch (e) {
     // A API não respondeu: desligada ou endereço errado
-    throw new Error("Não foi possível conectar ao servidor. Verifique se a API está rodando.");
+    throw new Error("Não foi possível conectar ao servidor.");
   }
 
   // 401 numa página logada = login expirou ou foi apagado

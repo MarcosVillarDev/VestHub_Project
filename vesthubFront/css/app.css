@@ -1,0 +1,174 @@
+/* =============================================================
+   app.css — VestHub | Layout comum das páginas logadas
+   Topo, barra inferior (celular) e menu lateral.
+   Usa as variáveis do style.css. Cada página tem o próprio CSS
+   para o conteúdo (inicio.css, notas.css, ranking.css...).
+   ============================================================= */
+
+:root {
+  --altura-topo:   56px;
+  --altura-barra:  64px;
+}
+
+/* -------------------------------------------------------------
+   1. BASE
+   ------------------------------------------------------------- */
+body.pagina-app {
+  background-color: var(--vesthub-white);
+  min-height: 100vh;
+  /* espaço para a barra inferior fixa no celular */
+  padding-bottom: calc(var(--altura-barra) + env(safe-area-inset-bottom, 0px));
+}
+
+/* -------------------------------------------------------------
+   2. TOPO — celular: preto com logo branco centralizado
+   ------------------------------------------------------------- */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  height: var(--altura-topo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  background-color: #000;
+}
+
+.topo-logo img {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+.logo-preto { display: none !important; }
+
+/* O menu ☰ só aparece a partir do tablet */
+.btn-menu {
+  display: none;
+  background: none;
+  border: 0;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--vesthub-white);
+  padding: 0.25rem;
+}
+
+/* -------------------------------------------------------------
+   5. BARRA INFERIOR — só no celular
+   ------------------------------------------------------------- */
+.barra-inferior {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1020;
+  height: calc(var(--altura-barra) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--vesthub-white);
+  border-top: 1px solid #ececec;
+}
+
+.barra-inferior a,
+.barra-inferior button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: 0;
+  font-size: 1.45rem;
+  color: var(--vesthub-dark);
+  text-decoration: none;
+}
+
+/* -------------------------------------------------------------
+   6. MENU LATERAL
+   ------------------------------------------------------------- */
+.menu-lateral { max-width: 300px; }
+
+.saudacao {
+  font-family: var(--font-titles);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.menu-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 10px;
+  color: var(--vesthub-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.menu-links a:hover,
+.menu-links a:focus-visible,
+.menu-links a[aria-current="page"] {
+  background-color: #f1f1f1;
+}
+
+.icone-barra {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+/* -------------------------------------------------------------
+   7. TABLET E DESKTOP (>= 768px)
+   ------------------------------------------------------------- */
+@media (min-width: 768px) {
+  body.pagina-app { padding-bottom: 0; }
+
+  .topo {
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+  .btn-menu       { display: block; }
+  .barra-inferior { display: none; }
+}
+
+/* Ícones próprios da barra inferior */
+.icone-barra {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Conteúdo padrão das páginas internas (título + área central) */
+.pagina-conteudo {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.75rem 1rem 2rem;
+}
+
+.pagina-titulo {
+  font-family: var(--font-titles);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--vesthub-dark);
+  margin: 0 0 0.25rem;
+}
+
+.pagina-subtitulo {
+  color: var(--vesthub-forgot);
+  font-size: 0.9rem;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .pagina-conteudo { padding: 2.5rem 1.5rem 3.5rem; }
+  .pagina-titulo   { font-size: 1.8rem; }
+}
